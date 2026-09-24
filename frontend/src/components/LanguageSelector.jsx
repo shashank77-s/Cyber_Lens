@@ -20,10 +20,10 @@ export default function LanguageSelector({ value, onChange }) {
             <button
               key={lang.code}
               onClick={() => onChange(lang.code)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-mono font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-mono font-medium transition-all border ${
                 isSelected
-                  ? "bg-signal text-ink font-bold shadow-glow-signal"
-                  : "bg-ink/70 text-mist border border-white/10 hover:border-signal/40 hover:text-white"
+                  ? "bg-emerald-500 text-white border-emerald-500 shadow-[0_10px_18px_-12px_rgba(16,185,129,0.8)]"
+                  : "bg-white text-slate-600 border-emerald-200 hover:border-emerald-300 hover:text-emerald-700"
               }`}
             >
               {lang.label}

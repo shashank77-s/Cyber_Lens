@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { CyberShieldLogo } from "../components/UIKit";
-import { Mail, Lock, LogIn, AlertCircle } from "lucide-react";
+import { Mail, Lock, LogIn, AlertCircle, Shield, Zap } from "lucide-react";
 
 export default function Login() {
   const { login } = useAuth();
@@ -33,88 +32,136 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center text-slate-100 px-4 py-12 animate-fade-in">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-6">
-          <CyberShieldLogo size="default" className="justify-center mb-3" />
-          <h2 className="font-display text-2xl font-bold text-white">
-            Security Access Terminal
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 py-12">
+
+      {/* ── Animated Background ── */}
+      <div className="auth-bg" />
+      <div className="auth-grid" />
+      <div className="auth-orb auth-orb-1" />
+      <div className="auth-orb auth-orb-2" />
+      <div className="auth-orb auth-orb-3" />
+
+      {/* ── Card ── */}
+      <div className="relative z-10 w-full max-w-md animate-slide-up">
+
+        {/* Logo / Header */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center mb-5">
+            <div className="logo-ring">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-panel-card to-ink border border-signal/40 flex items-center justify-center shadow-glow-signal relative">
+                <div className="absolute inset-0 bg-signal/20 blur-lg rounded-2xl" />
+                <Shield className="h-8 w-8 text-signal relative z-10" />
+                <span className="absolute bottom-1.5 right-1.5 h-2 w-2 rounded-full bg-signal animate-ping" />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <span className="font-display text-2xl font-bold tracking-tight bg-gradient-to-r from-emerald-900 via-emerald-700 to-green-500 bg-clip-text text-transparent">
+              CyberShield
+            </span>
+            <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-100 text-emerald-700 border border-emerald-200 tracking-widest">
+              AI
+            </span>
+          </div>
+
+          <h2 className="font-display text-3xl font-bold text-slate-800 mb-1">
+            Welcome Back
           </h2>
-          <p className="text-xs text-mist font-mono mt-1">
-            Authenticate to manage or review cyber incident reports
+          <p className="text-sm text-mist">
+            Authenticate to access your security portal
           </p>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="cyber-card rounded-2xl p-6 md:p-8 space-y-4 shadow-2xl border border-white/10"
-        >
+        {/* Auth Card */}
+        <div className="auth-card rounded-3xl p-8 space-y-5">
+
+          {/* Error */}
           {error && (
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-alert/10 border border-alert/30 text-alert text-xs">
+            <div className="auth-error">
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
-          <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-mist mb-1.5">
-              Account Email
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-mist" />
-              <input
-                type="email"
-                placeholder="name@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-ink/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-mist/40 focus:outline-none focus:ring-2 focus:ring-signal/40"
-                required
-              />
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Email field */}
+            <div className="auth-field">
+              <label className="auth-label">Account Email</label>
+              <div className="relative">
+                <Mail className="auth-input-icon h-4 w-4" />
+                <input
+                  type="email"
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="auth-input"
+                  required
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-mist mb-1.5">
-              Password
-            </label>
-            <div className="relative">
-              <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-mist" />
-              <input
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-ink/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-mist/40 focus:outline-none focus:ring-2 focus:ring-signal/40"
-                required
-              />
+            {/* Password field */}
+            <div className="auth-field">
+              <div className="flex items-center justify-between mb-2">
+                <label className="auth-label" style={{ marginBottom: 0 }}>Password</label>
+                <span className="text-[11px] font-mono text-mist/60 hover:text-signal cursor-pointer transition-colors duration-200">
+                  Forgot password?
+                </span>
+              </div>
+              <div className="relative">
+                <Lock className="auth-input-icon h-4 w-4" />
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="auth-input"
+                  required
+                />
+              </div>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 rounded-xl bg-signal text-ink font-semibold text-sm hover:brightness-110 shadow-glow-signal transition disabled:opacity-50 flex items-center justify-center gap-2 mt-2"
-          >
-            {loading ? (
-              <span className="inline-flex items-center gap-2">
-                <span className="h-4 w-4 rounded-full border-2 border-ink border-t-transparent animate-spin" />
-                Authenticating…
-              </span>
-            ) : (
-              <>
-                <LogIn className="h-4 w-4" />
-                Log In
-              </>
-            )}
-          </button>
+            {/* Submit button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="auth-btn mt-2"
+            >
+              {loading ? (
+                <span className="inline-flex items-center gap-2">
+                  <span className="h-4 w-4 rounded-full border-2 border-ink border-t-transparent animate-spin" />
+                  Authenticating…
+                </span>
+              ) : (
+                <>
+                  <LogIn className="h-4 w-4" />
+                  Log In to Portal
+                </>
+              )}
+            </button>
+          </form>
 
-          <p className="text-xs text-mist text-center pt-2">
-            New citizen or investigator?{" "}
-            <Link to="/register" className="text-signal hover:underline font-semibold">
-              Register an Account
+          {/* Divider */}
+          <div className="auth-divider">or</div>
+
+          {/* Sign up link */}
+          <p className="text-sm text-mist text-center">
+            New here?{" "}
+            <Link
+              to="/register"
+              className="text-signal font-semibold hover:text-white transition-colors duration-200 underline underline-offset-2"
+            >
+              Create an account
             </Link>
           </p>
-        </form>
+        </div>
+
+        {/* Bottom badge */}
+        <div className="mt-6 flex items-center justify-center gap-2 text-[11px] font-mono text-mist/50">
+          <Zap className="h-3 w-3 text-signal/60" />
+          <span>Secured by CyberShield AI · Incident Intelligence</span>
+        </div>
       </div>
     </div>
   );

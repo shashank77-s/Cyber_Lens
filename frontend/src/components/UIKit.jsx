@@ -23,10 +23,10 @@ export function CyberShieldLogo({ size = "default", className = "" }) {
       </div>
       <div>
         <div className="flex items-center gap-1.5">
-          <span className={`font-display ${isSmall ? "text-base" : "text-lg"} font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-signal bg-clip-text text-transparent`}>
+          <span className={`font-display ${isSmall ? "text-base" : "text-lg"} font-bold tracking-tight bg-gradient-to-r from-emerald-950 via-emerald-700 to-green-500 bg-clip-text text-transparent`}>
             CyberShield
           </span>
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-signal/15 text-signal border border-signal/30 tracking-widest">
+          <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-100 text-emerald-700 border border-emerald-200 tracking-widest">
             AI
           </span>
         </div>

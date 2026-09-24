@@ -42,18 +42,18 @@ export default function VoiceInput({ langCode, onResult }) {
       onClick={toggleListening}
       className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl border text-xs font-mono transition-all ${
         listening
-          ? "mic-active bg-alert/20 border-alert text-alert font-bold"
-          : "bg-ink/70 border-white/10 text-mist hover:border-signal/40 hover:text-signal"
+          ? "bg-red-50 border-red-200 text-red-600 font-bold shadow-[0_12px_20px_-16px_rgba(239,68,68,0.8)]"
+          : "bg-white border-emerald-200 text-slate-600 hover:border-emerald-300 hover:text-emerald-700 shadow-sm"
       }`}
     >
       {listening ? (
         <>
-          <MicOff className="h-3.5 w-3.5 text-alert animate-bounce" />
+          <MicOff className="h-3.5 w-3.5 text-red-500 animate-bounce" />
           <span>Recording… tap to finish</span>
         </>
       ) : (
         <>
-          <Mic className="h-3.5 w-3.5 text-signal" />
+          <Mic className="h-3.5 w-3.5 text-emerald-600" />
           <span>Speak Voice Input</span>
         </>
       )}

@@ -1,7 +1,7 @@
 import express from "express";
 import { classifyFraudType, translateToEnglish } from "../utils/huggingface.js";
 import { extractEntities } from "../utils/entityExtractor.js";
-import { getLegalInfo } from "../data/legalMapping.js";
+import { getLegalInfo, computeUrgency } from "../data/legalMapping.js";
 import { reconstructTimeline } from "../utils/timelineReconstructor.js";
 import { detectPlatformGuidance } from "../data/platformGuidance.js";
 import { generateFollowUpQuestions } from "../utils/followUpEngine.js";
@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
     const classification = await classifyFraudType(englishText);
     const entities = extractEntities(englishText);
     const legalInfo = getLegalInfo(classification.predictedType);
+    legalInfo.urgency = computeUrgency(classification.predictedType, entities, englishText);
     const timeline = reconstructTimeline(englishText);
     const platformGuidance = detectPlatformGuidance(englishText);
     const followUp = generateFollowUpQuestions(classification, entities);

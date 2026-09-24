@@ -35,8 +35,8 @@ function NavBar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-xl bg-ink/80 border-b border-white/10 px-4 md:px-10 py-3.5 flex items-center justify-between transition-all">
-      <Link to="/" className="flex items-center group">
+    <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-emerald-100 shadow-[0_6px_20px_rgba(16,70,42,0.05)] px-4 md:px-10 py-3.5 flex items-center justify-between transition-all duration-300">
+      <Link to="/" className="flex items-center group rounded-full p-1.5 hover:bg-emerald-50 transition-all duration-300">
         <CyberShieldLogo size="sm" />
       </Link>
 
@@ -228,25 +228,26 @@ function IntakePage() {
     <main className="max-w-4xl mx-auto px-4 md:px-8 py-10 md:py-14 animate-fade-in">
       {/* Hero Header */}
       <section className="mb-10 text-center md:text-left">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-signal/10 border border-signal/30 text-signal text-xs font-mono mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-700 text-xs font-mono mb-4 shadow-sm">
           <Shield className="h-3.5 w-3.5" />
           <span>AI-Assisted Cybercrime Incident Portal</span>
         </div>
-        <h1 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+        <h1 className="font-display text-3xl md:text-5xl font-bold tracking-tight text-slate-800 leading-tight">
           Report cybercrime incidents.
           <br />
-          <span className="bg-gradient-to-r from-signal via-cyan to-emerald-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-emerald-900 via-emerald-700 to-green-500 bg-clip-text text-transparent">
             We'll structure the legal complaint.
           </span>
         </h1>
-        <p className="mt-3 text-mist text-sm md:text-base max-w-2xl leading-relaxed">
+        <p className="mt-3 text-slate-600 text-sm md:text-base max-w-2xl leading-relaxed">
           Describe what happened in plain English, Hindi, or Kannada. Our intelligence engine extracts financial artifacts, maps relevant IT Act provisions, and compiles an official police complaint draft.
         </p>
       </section>
 
       {/* Incident Input Panel */}
-      <section className="cyber-card rounded-2xl p-5 md:p-7 space-y-4 shadow-2xl border border-white/10">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-white/5">
+      <section className="cyber-card cyber-card-hover relative overflow-hidden rounded-[28px] p-5 md:p-7 space-y-4 shadow-[0_24px_60px_-28px_rgba(16,70,42,0.28)] border border-emerald-100 hover:shadow-[0_30px_70px_-26px_rgba(16,70,42,0.32)] transition-all duration-300">
+        <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/80 to-transparent" />
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-emerald-100 bg-gradient-to-r from-emerald-50/80 via-white/90 to-emerald-50/70 rounded-2xl px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]">
           <LanguageSelector value={langCode} onChange={setLangCode} />
           <VoiceInput
             langCode={langCode}
@@ -260,9 +261,9 @@ function IntakePage() {
             onChange={(e) => setText(e.target.value)}
             rows={7}
             placeholder="Describe the incident: e.g. I received a phone call claiming to be Paytm customer care asking me to install AnyDesk. Shortly after, ₹45,000 was debited via UPI to merchant ref 82736192 on 15/08/2026..."
-            className="w-full bg-ink/80 border border-white/10 rounded-xl p-4 text-sm text-slate-100 placeholder:text-mist/40 focus:outline-none focus:ring-2 focus:ring-signal/40 focus:border-signal/40 transition resize-none leading-relaxed font-sans"
+            className="w-full bg-white/90 border border-emerald-200 rounded-2xl p-4 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:border-emerald-400 transition resize-none leading-relaxed font-sans shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_18px_28px_-24px_rgba(16,185,129,0.35)]"
           />
-          <div className="flex justify-between items-center text-[11px] font-mono text-mist/60 px-1 mt-1">
+          <div className="flex justify-between items-center text-[11px] font-mono text-slate-500 px-1 mt-1">
             <span>Minimum 10 characters</span>
             <span>{text.length} characters</span>
           </div>
@@ -278,7 +279,7 @@ function IntakePage() {
         <button
           onClick={handleAnalyze}
           disabled={loading || text.trim().length === 0}
-          className="w-full py-3.5 rounded-xl bg-signal text-ink font-bold text-sm hover:brightness-110 shadow-glow-signal transition disabled:opacity-40 flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-300 via-green-400 to-teal-400 text-emerald-950 font-bold text-sm hover:brightness-105 shadow-[0_14px_28px_-14px_rgba(34,197,94,0.9)] transition-all duration-300 disabled:opacity-40 flex items-center justify-center gap-2 cursor-pointer"
         >
           {loading ? (
             <span className="inline-flex items-center gap-2">

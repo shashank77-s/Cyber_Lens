@@ -1,7 +1,7 @@
 import express from "express";
 import { classifyFraudType } from "../utils/huggingface.js";
 import { extractEntities } from "../utils/entityExtractor.js";
-import { getLegalInfo } from "../data/legalMapping.js";
+import { getLegalInfo, computeUrgency } from "../data/legalMapping.js";
 import { reconstructTimeline } from "../utils/timelineReconstructor.js";
 import { detectPlatformGuidance } from "../data/platformGuidance.js";
 import { actionCriticalQuestions } from "../data/followUpQuestions.js";
@@ -40,6 +40,7 @@ router.post("/", async (req, res) => {
     let legalInfo = { ...getLegalInfo(classification.predictedType) };
     const timeline = reconstructTimeline(combinedText);
     const platformGuidance = detectPlatformGuidance(combinedText);
+    legalInfo.urgency = computeUrgency(classification.predictedType, entities, combinedText);
 
     const { escalate, urgentActions } = computeUrgencyAdjustment(originalClassification, answers);
     if (escalate && urgentActions && urgentActions.length > 0) {

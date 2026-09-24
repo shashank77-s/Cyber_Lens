@@ -56,7 +56,7 @@ export default function ManageOfficers() {
   };
 
   return (
-    <div className="min-h-screen text-slate-100 max-w-5xl mx-auto px-4 md:px-8 py-8 animate-fade-in">
+    <div className="min-h-screen text-slate-100 max-w-5xl mx-auto px-4 md:px-8 py-8 animate-slide-up">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10">
         <div>
@@ -76,7 +76,7 @@ export default function ManageOfficers() {
 
         <Link
           to="/admin"
-          className="flex items-center gap-2 px-4 py-2 rounded-xl cyber-card border border-white/10 text-xs font-mono text-mist-light hover:text-signal hover:border-signal/40 transition self-start md:self-auto"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl cyber-card border border-white/10 text-xs font-mono text-mist-light hover:text-signal hover:border-signal/40 hover:-translate-y-0.5 transition-all duration-200 self-start md:self-auto"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Full Admin Panel
@@ -98,7 +98,7 @@ export default function ManageOfficers() {
           placeholder="Search users by name or email…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-ink/70 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-mist/50 focus:outline-none focus:ring-2 focus:ring-signal/40"
+          className="w-full bg-ink/70 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-mist/50 focus:outline-none focus:border-signal/50 focus:ring-2 focus:ring-signal/10 hover:border-white/20 transition-all duration-200"
         />
       </div>
 
@@ -124,7 +124,7 @@ export default function ManageOfficers() {
       {!loading && !error && filteredUsers.length > 0 && (
         <div className="cyber-card rounded-2xl border border-white/10 divide-y divide-white/5 overflow-hidden">
           {filteredUsers.map((u) => (
-            <div key={u._id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 hover:bg-white/[0.02] transition">
+            <div key={u._id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 hover:bg-white/[0.04] transition-all duration-200 group border-l-2 border-l-transparent hover:border-l-signal/40">
               <div className="flex items-center gap-3.5 min-w-0">
                 <Avatar name={u.name} size="h-10 w-10" />
                 <div className="min-w-0">

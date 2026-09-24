@@ -5,7 +5,7 @@ export const legalMapping = {
       "IT Act Section 66D (Cheating by personation)",
       "BNS Section 318 (Cheating)",
     ],
-    urgency: "high",
+    urgency: "medium",
     evidence: [
       "Screenshot of the transaction (amount, time, UPI Ref / UTR ID)",
       "Bank statement showing the unauthorized debit",
@@ -48,7 +48,7 @@ export const legalMapping = {
       "IT Act Section 66D (Cheating by personation)",
       "IT Act Section 43 (Unauthorized access to computer system)",
     ],
-    urgency: "high",
+    urgency: "medium",
     evidence: [
       "Full screenshot of the phishing SMS, WhatsApp message, or email",
       "Exact phishing URL / website link address",
@@ -90,7 +90,7 @@ export const legalMapping = {
       "IT Act Section 66D (Cheating by personation)",
       "BNS Section 318 (Cheating)",
     ],
-    urgency: "high",
+    urgency: "medium",
     evidence: [
       "Destination wallet address and blockchain transaction hash (TxID)",
       "Screenshot of P2P escrow trade order and chat log",
@@ -134,7 +134,7 @@ export const legalMapping = {
       "BNS Section 351 (Criminal intimidation)",
       "BNS Section 356 (Defamation)",
     ],
-    urgency: "high",
+    urgency: "medium",
     evidence: [
       "Screenshots of app permissions requested (Contacts, Storage, Camera)",
       "Audio recordings or screenshots of abusive calls and threatening WhatsApp messages",
@@ -176,7 +176,7 @@ export const legalMapping = {
       "IT Act Section 66C (Identity theft)",
       "IT Act Section 66D (Cheating by personation)",
     ],
-    urgency: "high",
+    urgency: "medium",
     evidence: [
       "Time when phone network/signal completely stopped working",
       "Unauthorized banking/wallet debit SMS alerts received after SIM swap",
@@ -217,7 +217,7 @@ export const legalMapping = {
       "IT Act Section 66D (Cheating by personation)",
       "BNS Section 318 (Cheating)",
     ],
-    urgency: "high",
+    urgency: "medium",
     evidence: [
       "Screenshots of Telegram/WhatsApp task groups and recruiter chats",
       "Job offer letters, fake recruitment portal URLs, or fake contracts",
@@ -260,7 +260,7 @@ export const legalMapping = {
       "IT Act Section 66E (Violation of privacy)",
       "IT Act Section 43 (Unauthorized access)",
     ],
-    urgency: "high",
+    urgency: "medium",
     evidence: [
       "Screenshot of unauthorized login alerts or lockout screens",
       "Screenshots of unauthorized posts, stories, or DMs sent by the hacker",
@@ -302,7 +302,7 @@ export const legalMapping = {
       "IT Act Section 66D (Cheating using computer resource)",
       "BNS Section 318 (Cheating)",
     ],
-    urgency: "high",
+    urgency: "medium",
     evidence: [
       "High-resolution screenshots of all relevant chats, messages, and calls",
       "Bank/payment statements and transaction IDs (if financial loss occurred)",
@@ -339,6 +339,42 @@ export const legalMapping = {
     guidance: "1. Call 1930 immediately if money was debited to request a financial freeze. 2. Disconnect Wi-Fi/mobile data if unauthorized remote apps were installed. 3. Change passwords and enable 2FA on email and banking accounts. 4. Preserve screenshots of chats, transactions, and phone numbers. 5. File this complaint draft on cybercrime.gov.in.",
   },
 };
+
+export function computeUrgency(fraudType, entities = {}, incidentText = "") {
+  const type = (fraudType || "").toLowerCase();
+  const text = (incidentText || "").toLowerCase();
+  const amountValues = Array.isArray(entities?.amounts) ? entities.amounts : [];
+  const hasMoneyLoss = amountValues.some((amount) => {
+    const numeric = Number(String(amount).replace(/[^\d.]/g, ""));
+    return Number.isFinite(numeric) && numeric > 0;
+  });
+  const negatedLossPattern = /(no\s+(money|payment|loss|debit|transfer|withdrawal)|not\s+(paid|transferred|debited|withdrawn)|never\s+(paid|transferred|debited|withdrawn))/i;
+  const confirmedFinancialLoss = hasMoneyLoss || (/(transfer|debit|withdraw|paid|sent|upi|bank|wallet|crypto|transaction|amount)/i.test(text) && !negatedLossPattern.test(text));
+  const accountCompromiseKeywords = /(hacked|password changed|recovery email|login alert|otp|one time password|account takeover|unauthorized login|social media)/i;
+  const extortionKeywords = /(blackmail|extort|threat|harass|abuse|morphed|intimidat|nude|defamation|threatening)/i;
+
+  const isCriticalFinancial = confirmedFinancialLoss;
+  const isAccountCompromise = accountCompromiseKeywords.test(text) || /hacked|recovery|link/i.test(type);
+  const isExtortion = extortionKeywords.test(text) || /loan app|harassment/i.test(type);
+
+  if (/upi payment fraud|sim swap fraud|peer to peer cryptocurrency fraud|fake loan app harassment|online job scam/.test(type)) {
+    return isCriticalFinancial || isExtortion ? "high" : "medium";
+  }
+
+  if (/phishing scam/.test(type)) {
+    return isCriticalFinancial || isAccountCompromise ? "high" : "medium";
+  }
+
+  if (/social media account hacking/.test(type)) {
+    return isExtortion || isAccountCompromise ? "high" : "medium";
+  }
+
+  if (/other cybercrime/.test(type)) {
+    return isCriticalFinancial || isAccountCompromise || isExtortion ? "high" : "medium";
+  }
+
+  return isCriticalFinancial || isExtortion ? "high" : "medium";
+}
 
 export function getLegalInfo(fraudType) {
   return legalMapping[fraudType] || legalMapping["other cybercrime"];

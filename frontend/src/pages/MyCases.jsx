@@ -20,7 +20,7 @@ export default function MyCases() {
   }, []);
 
   return (
-    <div className="min-h-screen text-slate-100 max-w-4xl mx-auto px-4 md:px-8 py-8 animate-fade-in">
+    <div className="min-h-screen text-slate-100 max-w-4xl mx-auto px-4 md:px-8 py-8 animate-slide-up">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10">
         <div>
@@ -40,7 +40,7 @@ export default function MyCases() {
 
         <Link
           to="/"
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-signal text-ink font-semibold text-xs hover:brightness-110 shadow-glow-signal transition self-start sm:self-auto"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-signal to-cyan text-ink font-bold text-xs hover:brightness-110 hover:-translate-y-0.5 shadow-glow-signal transition-all duration-300 self-start sm:self-auto"
         >
           <Plus className="h-4 w-4" />
           File New Complaint
@@ -72,7 +72,7 @@ export default function MyCases() {
           </p>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-signal text-ink font-semibold text-xs hover:brightness-110 shadow-glow-signal transition"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-signal to-cyan text-ink font-bold text-xs hover:brightness-110 hover:-translate-y-0.5 shadow-glow-signal transition-all duration-300"
           >
             <Plus className="h-4 w-4" />
             File Incident Report
@@ -92,11 +92,11 @@ export default function MyCases() {
             return (
               <div
                 key={c._id}
-                className="cyber-card cyber-card-hover rounded-2xl p-6 transition-all duration-300"
+                className="cyber-card cyber-card-hover rounded-2xl p-6 transition-all duration-300 group"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 pb-3 border-b border-white/5">
                   <div className="flex items-center gap-2.5 flex-wrap">
-                    <span className="font-display font-bold text-white text-lg capitalize">
+                    <span className="font-display font-bold text-white text-lg capitalize group-hover:text-signal/90 transition-colors duration-200">
                       {c.classification?.predictedType}
                     </span>
                     {c.legalInfo?.urgency && (
