@@ -416,7 +416,7 @@ export default function CaseReviewDashboard() {
                         </div>
                       </div>
 
-                      <p className="text-sm text-slate-700 mb-3 bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-100 leading-relaxed shadow-sm">
+                      <p className="text-sm text-emerald-950 mb-3 bg-emerald-50/90 p-3.5 rounded-xl border border-emerald-200 leading-relaxed shadow-sm">
                         {c.englishText || c.originalText}
                       </p>
 

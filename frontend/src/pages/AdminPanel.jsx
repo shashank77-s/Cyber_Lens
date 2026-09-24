@@ -467,7 +467,7 @@ export default function AdminPanel() {
 
                     {/* Complaint Content */}
                     <div className="mb-4">
-                      <p className="text-sm text-slate-700 leading-relaxed bg-emerald-50/70 p-4 rounded-xl border border-emerald-100 shadow-sm">
+                      <p className="text-sm text-emerald-950 leading-relaxed bg-emerald-50/90 p-4 rounded-xl border border-emerald-200 shadow-sm">
                         {c.englishText || c.originalText}
                       </p>
                     </div>
