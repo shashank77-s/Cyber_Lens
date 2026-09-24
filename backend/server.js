@@ -29,6 +29,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/cases", casesRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/refine", refineRoute);
+app.get("/", (req, res) => res.send("CyberShield AI backend is running"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`CyberShield backend running on http://localhost:${PORT}`));
