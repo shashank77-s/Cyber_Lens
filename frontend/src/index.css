@@ -34,8 +34,25 @@
     color: #173028 !important;
   }
 
-  .text-slate-100 {
+  .text-white\/90 {
+    color: rgba(23, 48, 40, 0.9) !important;
+  }
+
+  .text-white\/80 {
+    color: rgba(23, 48, 40, 0.8) !important;
+  }
+
+  .text-slate-100,
+  .text-slate-200,
+  .text-slate-300,
+  .text-slate-400,
+  .text-slate-500,
+  .text-slate-600 {
     color: #1f2f2c !important;
+  }
+
+  .text-slate-700 {
+    color: #173028 !important;
   }
 
   .text-mist {
