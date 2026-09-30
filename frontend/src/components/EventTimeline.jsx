@@ -90,7 +90,7 @@ export default function EventTimeline({ caseId }) {
                     <Icon className="h-3 w-3" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-white/90 font-medium">{ev.message}</p>
+                    <p className="text-slate-700 font-medium">{ev.message}</p>
                     <p className="text-mist/70 font-mono text-[10px] mt-0.5 flex items-center gap-1">
                       <Clock className="h-2.5 w-2.5" />
                       <span>{ev.actor?.name || "System"}</span>

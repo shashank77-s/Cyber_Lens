@@ -287,7 +287,7 @@ export default function DraftPreview({ result, onDownload, downloading }) {
                   {step.step}
                 </span>
                 <div className="bg-ink/40 p-3 rounded-xl border border-white/5 flex-1">
-                  <p className="text-sm text-white/90">{step.text}</p>
+                  <p className="text-sm text-slate-700">{step.text}</p>
                   {(step.date || step.time) && (
                     <span className="mt-1 inline-block text-xs text-signal font-mono">
                       {[step.date, step.time].filter(Boolean).join(" · ")}
