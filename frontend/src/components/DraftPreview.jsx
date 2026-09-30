@@ -286,10 +286,10 @@ export default function DraftPreview({ result, onDownload, downloading }) {
                 <span className="absolute -left-6 top-1 h-5 w-5 rounded-full bg-panel-card border-2 border-signal text-signal text-[10px] font-bold font-mono flex items-center justify-center shadow-glow-signal">
                   {step.step}
                 </span>
-                <div className="bg-ink/40 p-3 rounded-xl border border-white/5 flex-1">
-                  <p className="text-sm text-slate-700">{step.text}</p>
+                <div className="bg-ink/40 p-3 rounded-xl border border-white/5 flex-1" style={{ color: "#173028" }}>
+                  <p className="text-sm" style={{ color: "#173028" }}>{step.text}</p>
                   {(step.date || step.time) && (
-                    <span className="mt-1 inline-block text-xs text-signal font-mono">
+                    <span className="mt-1 inline-block text-xs font-mono" style={{ color: "#2d8a59" }}>
                       {[step.date, step.time].filter(Boolean).join(" · ")}
                     </span>
                   )}
